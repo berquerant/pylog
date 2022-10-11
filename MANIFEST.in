@@ -1,0 +1,4 @@
+include LICENSE
+recursive-include tests *
+recursive-include *.md Makefile
+recursive-exclude * __pycache__
