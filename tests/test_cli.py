@@ -1,8 +1,36 @@
-import pylog.cli as cli
-from textwrap import dedent
 from io import StringIO
+from textwrap import dedent
 from typing import Optional
+
 import pytest
+
+import pylog.cli as cli
+
+
+@pytest.mark.parametrize(
+    "args,want",
+    [
+        (
+            ["x"],
+            cli.Arguments(lambda_expr=["x"]),
+        ),
+        (
+            ["x", "-i", "y=0"],
+            cli.Arguments(lambda_expr=["x"], init=["y=0"]),
+        ),
+        (
+            ["x", "-i", "y=0", "z=1"],
+            cli.Arguments(lambda_expr=["x"], init=["y=0", "z=1"]),
+        ),
+        (
+            ["x", "x**x", "-i", "y=0", "z=1", "-e", "f()"],
+            cli.Arguments(lambda_expr=["x", "x**x"], init=["y=0", "z=1"], last="f()"),
+        ),
+    ],
+)
+def test_arguments_new(args: list[str], want: cli.Arguments):
+    got = cli.Arguments.new(cli.new_parser().parse_args(args))
+    assert want == got
 
 
 @pytest.mark.parametrize(
@@ -107,7 +135,7 @@ import pytest
             """
             ),
             [
-                Exception("second"),
+                Exception("lambda[0](('second',), {}) caused second"),
             ],
         ),
         (
@@ -130,7 +158,7 @@ import pytest
             """
             ),
             [
-                Exception("second"),
+                Exception("lambda[0](('second',), {}) caused second"),
             ],
         ),
         (
@@ -195,6 +223,37 @@ import pytest
             """
             ),
             [],
+        ),
+        (
+            "last lambda raises an exception",
+            [
+                "c = 0",
+                dedent(
+                    """\
+                def cnt(delta):
+                    global c
+                    c += delta
+                    return c
+                """
+                ),
+            ],
+            [
+                'f"{cnt(len(x))} {x}"',
+            ],
+            'f"count = {C}"',
+            [
+                "first",
+                "second",
+                "third",
+            ],
+            dedent(
+                """\
+                5 first
+                11 second
+                16 third
+            """
+            ),
+            [Exception("lambda[last]((), {}) caused name 'C' is not defined")],
         ),
         (
             "timedelta",

@@ -7,7 +7,7 @@ name = "pylog"
 description = "A light-weight wrapper of standard log."
 
 readme = "README.md"
-version = "0.1.0"
+version = "0.2.0"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
 classifiers = [
