@@ -39,3 +39,11 @@ $ seq 0 3 | python -m pylog.cli 'datetime(2022,10,11,hour=12)+timedelta(hours=in
 ```
 
 Help: `python -m pylog.cli -h`
+
+## Dev
+
+``` bash
+./bin/build_docker.sh
+# run test
+./bin/pipenv.sh make test
+```

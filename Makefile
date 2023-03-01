@@ -1,11 +1,11 @@
 .PHONY: test
 test:
-	@pipenv run check
-	@pipenv run test
+	@python -m pipenv run check
+	@python -m pipenv run test
 
 .PHONY: fix
 fix:
-	@pipenv run black tests pylog
+	@python -m pipenv run black tests pylog
 
 .PHONY: clean
 clean:
@@ -30,4 +30,4 @@ dist: clean
 
 .PHONY: init
 init:
-	@pipenv install --dev
+	@python -m pipenv install --dev
