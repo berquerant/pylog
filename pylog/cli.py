@@ -257,7 +257,6 @@ def new_parser() -> argparse.ArgumentParser:
 
 @dataclass
 class Arguments:
-
     lambda_expr: list[str]
     init: Optional[list[str]] = None
     last: Optional[str] = None
