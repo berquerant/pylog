@@ -1,4 +1,5 @@
 """Entry point of CLI."""
+
 import argparse
 import logging
 import sys
@@ -122,9 +123,11 @@ def new_mapper_chain(
     ]
     last_function = cast(
         Optional[Callable[[], Any]],
-        None
-        if last_lambda is None
-        else __watch("lambda[last]", eval(f"lambda: {last_lambda}", globals(), local_table)),
+        (
+            None
+            if last_lambda is None
+            else __watch("lambda[last]", eval(f"lambda: {last_lambda}", globals(), local_table))
+        ),
     )
 
     def inner(x: Any) -> Optional[Any]:

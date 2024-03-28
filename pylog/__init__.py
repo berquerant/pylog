@@ -75,6 +75,7 @@ Aggregate:
     EOS
     19.390719429665317
 """  # noqa: E501
+
 import logging
 from dataclasses import dataclass
 from .logger import (  # noqa: F401
