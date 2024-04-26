@@ -1,7 +1,8 @@
-import pylog.logger as logger
-from typing import Optional, Any
+from typing import Any, Optional
 
 import pytest
+
+import pylog.logger as logger
 
 
 class mockFunc:

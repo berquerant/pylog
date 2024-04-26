@@ -59,7 +59,7 @@ class Mapper:
     last_function: Callable[[], Optional[Any]]
 
     @dataclass
-    class Funcs:
+    class Funcs:  # noqa: D106
         mapper: Callable[[Any], Optional[Any]]
         last_mapper: Callable[[], Optional[Any]]
 
@@ -76,7 +76,6 @@ class Mapper:
     @contextmanager
     def apply_symtable(self) -> Iterator[Funcs]:
         """Register symbols to call the function."""
-
         updated_keys = set(self.symtable.keys()) & set(globals().keys())
         if updated_keys:
             raise Exception(f"cannot update global symtable keys {updated_keys}")
@@ -171,7 +170,7 @@ def __map_lines(
             __on_exception(e)
 
 
-def map_lines(
+def map_lines(  # noqa: D103
     lambda_list: list[str],
     lines: Iterator[str],
     output: TextIO,
@@ -188,7 +187,7 @@ def map_lines(
     )
 
 
-def new_parser() -> argparse.ArgumentParser:
+def new_parser() -> argparse.ArgumentParser:  # noqa: D103
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=dedent(

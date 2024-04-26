@@ -1,4 +1,5 @@
-"""A light-weight wrapper of standard log.
+"""
+A light-weight wrapper of standard log.
 
 Logging basic:
 
@@ -78,14 +79,15 @@ Aggregate:
 
 import logging
 from dataclasses import dataclass
+from typing import Optional
+
 from .logger import (  # noqa: F401
     Event,
-    MapperT,
-    Mapper,
-    PutError,
     Logger,
+    Mapper,
+    MapperT,
+    PutError,
 )
-from typing import Optional
 
 
 @dataclass

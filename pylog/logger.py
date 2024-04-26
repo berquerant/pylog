@@ -40,10 +40,10 @@ class Event:
 
     @property
     def keywords(self) -> dict[str, Any]:
-        """kwargs as a dict."""
+        """Kwargs as a dict."""
         return dict(self.kwargs)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # noqa: D105
         return self.fmt.format(*self.args, **dict(self.kwargs))
 
 
@@ -80,7 +80,6 @@ class Mapper:
 
         :ignore_result: ignore returned value of `mapper` if True
         """
-
         if ignore_result:
 
             def inner_ignore(ev: Event) -> Optional[Event]:
@@ -103,12 +102,12 @@ class Mapper:
     def __call__(self, ev: Event) -> Optional[Event]:
         return self.mapper(ev)
 
-    def __add__(self, other: Union[MapperT, "Mapper"]) -> "Mapper":
+    def __add__(self, other: Union[MapperT, "Mapper"]) -> "Mapper":  # noqa: D105
         if isinstance(other, Mapper):
             return self.next(other.mapper)
         return self.next(other)
 
-    def __or__(self, other: Union[MapperT, "Mapper"]) -> "Mapper":
+    def __or__(self, other: Union[MapperT, "Mapper"]) -> "Mapper":  # noqa: D105
         if isinstance(other, Mapper):
             return self.next(other.mapper, ignore_result=True)
         return self.next(other, ignore_result=True)
