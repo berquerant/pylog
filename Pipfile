@@ -17,9 +17,9 @@ ruff = "*"
 python_version = "3.11"
 
 [scripts]
-check = "tox run-parallel -m check --parallel-no-spinner"
-test = "tox run-parallel -m test --parallel-no-spinner"
-ci = "tox run-parallel -m ci --parallel-no-spinner"
+check = "tox run-parallel -m check --parallel-no-spinner --parallel-live"
+test = "tox run-parallel -m test --parallel-no-spinner --parallel-live"
+ci = "tox run-parallel -m ci --parallel-no-spinner --parallel-live"
 dev = "pip install --editable ."
 install = "pip install ."
 dist = "python setup.py sdist"
